@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0043)http://ykt.fzu.edu.cn:9001/ThirdWeb/PayCode -->
-<html xmlns="http://www.w3.org/1999/xhtml"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>福州大学一码通</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns=""><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>福州大学一码通</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--App自定义的mui css-->
 
     <link rel="stylesheet" href="./通行码_files/bootstrap.min.css"><link rel="stylesheet" href="./通行码_files/style4.css">
@@ -66,15 +66,32 @@
     </style>
         <!--点击选择支付方式-->
         <script type="text/javascript">
-            function GetDate(flag) {
-                AjaxGet('http://ykt.fzu.edu.cn:9001/ThirdWeb/GetServerDate', null, function (result) {
-                    $("#monthDay").html(result.monthDay);
-                    $("#second").html(result.second);
-                    $("#hourMinute").html(result.hourMinute);
-                    if (flag) {
-                        $("#marqueeStr").html(result.marqueeStr);
-                    }
-                });
+            var slogans = ['自由', '平等', '公正', '法治'];
+            var randomNo = Math.floor(Math.random() * 4);
+            var t = null;
+            t = setTimeout(time, 1000);//開始运行
+            function time() {
+                clearTimeout(t);//清除定时器
+                dt = new Date();
+                var mt = pad(dt.getMonth() + 1, 2);
+                var day = pad(dt.getDate(), 2);
+                var h = pad(dt.getHours(), 2);//获取时
+                var m = pad(dt.getMinutes(), 2);//获取分
+                var s = pad(dt.getSeconds(), 2);//获取秒
+                $('#monthDay').html(mt + '月' + day + '日');
+                $('#second').html(s);
+                $('#hourMinute').html(h + ':' + m);
+                $('#marqueeStr').html(slogans[randomNo]);
+                t = setTimeout(time, 1000); //设定定时器，循环运行
+            }
+
+            function pad(num, n) {
+                var len = num.toString().length;
+                while(len < n) {
+                    num = "0" + num;
+                    len++;
+                }
+                return num;
             }
         </script>
     </head>
@@ -107,7 +124,7 @@
                     <marquee class="jkmColor" style="height: 35px; font-size: 40px; display: block; padding-top: 20px; color: rgb(29, 149, 63);" id="marqueeStr"></marquee>
                 </div>
                 <div id="reason" class="jkmColor" style="display: none; text-align: left; width: 80%; margin: 0px auto; color: rgb(29, 149, 63);"></div>
-                <div id="slogan" class="jkmColor" style="width: 80%; text-align: left; margin: 0px auto; color: rgb(29, 149, 63);">未见异常，允许通行，请主动出示，配合检测，并做好自我防护，出行前请确认。</div>     
+                <div id="slogan" class="jkmColor" style="width: 80%; text-align: left; margin: 0px auto; color: rgb(29, 149, 63);">未见异常，允许通行，请主动出示，配合检测，并做好自我防护，出行前请确认。</div>
             </div>
            
           	<div class="bank_update" id="changeWay">
