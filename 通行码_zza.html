@@ -66,32 +66,37 @@
     </style>
         <!--点击选择支付方式-->
         <script type="text/javascript">
-            var slogans = ['自由', '平等', '公正', '法治'];
-            var randomNo = Math.floor(Math.random() * 4);
-            var t = null;
-            t = setTimeout(time, 1000);//開始运行
+            const slogans = ['自由', '平等', '公正', '法治'];//滚动标语内容
+            let t = null;
+            t = setTimeout(time, 1000);//开始运行
+
             function time() {
                 clearTimeout(t);//清除定时器
-                dt = new Date();
-                var mt = pad(dt.getMonth() + 1, 2);
-                var day = pad(dt.getDate(), 2);
-                var h = pad(dt.getHours(), 2);//获取时
-                var m = pad(dt.getMinutes(), 2);//获取分
-                var s = pad(dt.getSeconds(), 2);//获取秒
-                $('#monthDay').html(mt + '月' + day + '日');
+                let dt = new Date();
+                let mt = checkTime(dt.getMonth() + 1);//获取月份
+                let date = checkTime(dt.getDate());//获取日期
+                let h = checkTime(dt.getHours());//获取时
+                let m = checkTime(dt.getMinutes());//获取分
+                let s = checkTime(dt.getSeconds());//获取秒
+                let tm = dt.getTime();//获取时间戳
+                let No = Math.floor(tm / (1000 * 60 * 60 *24)) % 4;//计算标语序号
+                //根据标签id写入时间及标语
+                $('#monthDay').html(mt + '月' + date + '日');
                 $('#second').html(s);
                 $('#hourMinute').html(h + ':' + m);
-                $('#marqueeStr').html(slogans[randomNo]);
+                $('#marqueeStr').html(slogans[No]);
                 t = setTimeout(time, 1000); //设定定时器，循环运行
             }
 
-            function pad(num, n) {
-                var len = num.toString().length;
-                while(len < n) {
-                    num = "0" + num;
-                    len++;
+            function checkTime(time) {
+                /*
+                检查时间格式
+                不足两位的数字在前面补“0”
+                 */
+                if (time < 10) {
+                    time = "0" + time;
                 }
-                return num;
+                return time;
             }
         </script>
     </head>
