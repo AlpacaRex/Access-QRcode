@@ -67,8 +67,9 @@
         <!--点击选择支付方式-->
         <script type="text/javascript">
             const slogans = ['富强', '民主', '文明', '和谐',
-                '自由', '平等', '公正', '法治',
-                '爱国', '敬业', '诚信', '友善'];//滚动标语内容
+                             '自由', '平等', '公正', '法治',
+                             '爱国', '敬业', '诚信', '友善',
+                             '明德', '至诚', '博学', '远志'];//滚动标语内容
             let t = null;
             t = setTimeout(time, 1000);//开始运行
 
@@ -81,7 +82,7 @@
                 let m = checkTime(dt.getMinutes());//获取分
                 let s = checkTime(dt.getSeconds());//获取秒
                 let tm = dt.getTime();//获取时间戳
-                let No = Math.floor((tm + 60 * 60 * 8 * 1000) / (60 * 60 * 24 * 1000)) % 12;//计算标语序号
+                let No = Math.floor((tm + 60 * 60 * 8 * 1000) / (60 * 60 * 24 * 1000)) % 16;//计算标语序号
                 //根据标签id写入时间及标语
                 $('#monthDay').html(mt + '月' + date + '日');
                 $('#second').html(s);
